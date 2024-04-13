@@ -9,7 +9,7 @@ class Database():
         self.database = self.client['FoodTracker']
         self.food = self.database['food']
 
-    def add_food(self, name, purchaseCost, currentServing, intialServingCount, purchaseDate, expireDate, macros):
+    def addFood(self,username,  name, purchaseCost, currentServing, intialServingCount, purchaseDate, expireDate, macros):
 
         foodItem = {
             "name": name,
@@ -21,15 +21,16 @@ class Database():
             "macros": macros
         }
 
-        self.food.insert_one(foodItem)
+        self.food.update_one({"username": username}, {"$push": {"foods": foodItem}}, upsert = True)
 
-    def remove_food(self, name):
+    def remove_food(self, username, foodName):
 
-        result = self.food.delete_one({"name": name})
-        if result.deleted_count > 0:
-            print(f"Remove Item: {name}")
+        result = self.food.update_one({"username": username}, {"$pull": {"foods": {"name": foodName}}})
+        print(result.modified_count)
+        if result.modified_count > 0:
+            print(f"Remove Item: {foodName} from {username} Pantry")
         else:
-            print(f"No food item found with name: {name}")
+            print(f"No food item found with name: {foodName} in {username} Pantry")
 
 if __name__ == "__main__":
     foodPantry = Database()
@@ -39,8 +40,8 @@ if __name__ == "__main__":
         "protien": 10
     }
 
-    #foodPantry.add_food(name = "Fruit Snacks", purchaseCost = 1.00, currentServing = 5, intialServingCount = 10, purchaseDate = "2024-04-13", expireDate = "2024-04-20", macros = macrosList)
-    foodPantry.remove_food("Fruit Snacks")
+    #foodPantry.addFood(username = "Rino", name = "Fruit Snacks", purchaseCost = 1.00, currentServing = 5, intialServingCount = 10, purchaseDate = "2024-04-13", expireDate = "2024-04-20", macros = macrosList)
+    foodPantry.remove_food("Rino", "Fruit Snacks")
 
 
 
