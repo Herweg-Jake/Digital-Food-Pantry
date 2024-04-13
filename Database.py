@@ -1,6 +1,8 @@
 #Database Using MongoDB
 
 from pymongo import MongoClient
+from FDCAPI import search
+from FDCAPI import  fetch_nutrients
 
 class Database():
 
@@ -65,6 +67,17 @@ class Database():
             print(f"No {foodName} found in {username}'s pantry")
             return None
 
+    def returnPantry(self, username):
+        result = self.food.find_one(
+            {"username": username}, {"_id": 0, "foods": 1}
+        )
+
+        if result and "foods" in result:
+            return result['foods']
+        else:
+            print(f"No items in pantry found for {username}")
+            return {}
+
 if __name__ == "__main__":
     foodPantry = Database()
 
@@ -73,9 +86,26 @@ if __name__ == "__main__":
         "protien": 10
     }
 
-    #foodPantry.addFood(username = "Rino", name = "Joe Beans", purchaseCost = 1.00, currentServing = 5, intialServingCount = 10, purchaseDate = "2024-04-13", expireDate = "2024-04-20", macros = macrosList)
+    def fdcid_find(val, num):
+        fdc = val[num]
+        print(fdc['FDC ID'])
+        return fdc['FDC ID']
+
+    val = search('Carrot')
+    fdc_id = fdcid_find(val, 1)
+    nutrients = fetch_nutrients(fdc_id)
+
+    foodPantry.addFood(username = "Joe Mama", name = "Hot Dogs", purchaseCost = 1.00, currentServing = 5, intialServingCount = 10, purchaseDate = "2024-04-13", expireDate = "2024-04-20", macros = nutrients)
     #foodPantry.remove_food("Rino", "Joe Beans")
     #foodPantry.editFood("Rino", "Joe Fruits", 8)
-    print(foodPantry.getFood("Rino", "Joe Beans"))
+    #print(foodPantry.getFood("Rino", "Joe Beans"))
+    pantry = foodPantry.returnPantry("Joe Mama")
+    print(pantry)
+    if pantry:
+        for foodKey, details in pantry.items():
+            print(f"{foodKey.replace('_', ' ')}: {details}")
+    else:
+        print("Nothing to display")
+
 
 
