@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Search Food</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body id="search-food-page">
+    <div>
+        <div><h2>Find Your Food</h2></div>
+        <form method="post">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+                {{ form.food_name(size=20, placeholder="Enter food name") }}
+                <input type="submit" value="Search" class="btn">
+            </div>
+        </form>
+    </div>
+</body>
+</html>

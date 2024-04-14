@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>{{ food_details.get('name', 'Unknown Food') }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body id="form-layout">
+    <h2>Nutrient Details for {{ food_details.get('name', 'Unknown Food') }}</h2>
+    <div class="content">
+        <div class="container">  <!-- Container for the list and the form -->
+            <div class="nutrient-list">
+                <ul>
+                    {% if nutrients %}
+                        {% for nutrient, values in nutrients.items() %}
+                            <li>{{ nutrient }}: {{ values[0] }} {{ values[1] }}</li>
+                        {% endfor %}
+                    {% else %}
+                        <p>No nutrient data found.</p>
+                    {% endif %}
+                </ul>
+            </div>
+            <div class="form-container">
+                <form action="{{ url_for('save_food_details', fdc_id=fdc_id) }}" method="post">
+                    <label for="cost">Cost:</label>
+                    <input type="hidden" name="name" value="{{ food_details.get('name', 'Unknown Food') }}">
+                    <input type="text" name="cost" value="{{ food_details.get('cost', '') }}" required>
+                    <label for="servings">Servings:</label>
+                    <input type="number" name="servings" value="{{ food_details.get('servings', '') }}" required>
+                    <label for="expire_date">Expire Date:</label>
+                    <input type="date" name="expire_date" value="{{ food_details.get('expire_date', '') }}" required>
+                    <button type="submit">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

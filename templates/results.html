@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Search Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body class="search-results-page">
+    <h2>Search Results for "{{ food_name }}"</h2>
+    {% if search_results %}
+        {% for result in search_results %}
+            <div class="result-container">
+                <ul class="result-list">
+                    <li class="result-description">Description: {{ result['Description'] }}</li>
+                    <li class="result-brand">Brand: {{ result['Brand Owner'] }}</li>
+                </ul>
+                <form method="post" action="{{ url_for('select_result') }}" class="select-form">
+                    <input type="hidden" name="name" value="{{ food_name }}">
+                    <input type="hidden" name="fdc_id" value="{{ result['FDC ID'] }}">
+                    <input type="hidden" name="description" value="{{ result['Description'] }}">
+                    <input type="hidden" name="dataType" value="{{ result['Data Type'] }}">
+                    <input type="hidden" name="brandOwner" value="{{ result['Brand Owner'] }}">
+                    <input type="submit" value="Select">
+                </form>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No results found.</p>
+    {% endif %}
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const descriptions = document.querySelectorAll('.result-description');
+            const brands = document.querySelectorAll('.result-brand');
+            
+            function titleCase(text) {
+                return text.toLowerCase().split(' ').map(function(word) {
+                    return word.charAt(0).toUpperCase() + word.slice(1);
+                }).join(' ');
+            }
+            
+            descriptions.forEach((description) => {
+                description.textContent = 'Description: ' + titleCase(description.textContent.slice('Description: '.length));
+            });
+            
+            brands.forEach((brand) => {
+                brand.textContent = 'Brand: ' + titleCase(brand.textContent.slice('Brand: '.length));
+            });
+        });
+    </script>
+</body>
+</html>

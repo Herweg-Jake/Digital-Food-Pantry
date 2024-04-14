@@ -1,0 +1,332 @@
+@keyframes fadeInWelcome {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(-30px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: white }
+}
+
+* {
+    font-family: 'Montserrat', sans-serif;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    background-color: #222831;
+    font-family: 'Montserrat', sans-serif;
+}
+
+h1, h2 {
+    color: #EEEEEE;
+    width: 100%;
+    text-align: center;
+    padding: 20px 0;
+    background-color: #222831;
+    z-index: 10;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 0.05em solid white;
+    display: inline-block;
+    line-height: 1;
+}
+
+h1 {
+    font-size: 12rem;
+    animation: typing 2s steps(17, end) forwards, blink-caret 2s step-end 4s;
+}
+
+h2 {
+    font-size: 4rem;
+    line-height: 1.5;
+}
+
+body {
+    padding-top: 50px; 
+}
+
+h3 {
+    color: #EEEEEE;
+    font-size: 4rem;
+    top: 0;
+    text-align: center;
+}
+
+input, button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+}
+
+input {
+    background: transparent;
+    color: #baa1ba;
+    caret-color: #baa1ba;
+    text-align: center;
+    font-size: 1.2em;
+}
+
+button {
+    background-color: #393E46;
+    color: #EEEEEE;
+    height: 60px;
+    cursor: pointer;
+}
+
+#input-area {
+    animation: fadeInUp 0.5s ease-out forwards;
+}
+
+#input-area input[type="text"][name="username"] {
+    font-size: 2em;
+}
+
+#top {
+    margin: 0;
+    padding: 0;
+}
+
+.cnt {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #EEEEEE;
+}
+
+
+.btn {
+    background-color: #393E46; 
+    color: #EEEEEE;
+    border: 2px solid #FFFFFF; 
+    border-radius: 5px; 
+    padding: 10px 20px; 
+    cursor: pointer; 
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease; 
+    width: auto;
+    display: inline-block; 
+    text-align: center; 
+    margin-top: 20px; 
+    outline: none; 
+}
+
+.btn:hover {
+    background-color: #4E545B; 
+    border-color: #CCCCCC;
+}
+
+
+.search-results-page {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    background-color: #222831;
+    overflow-y: auto;
+    padding-top: 120px;
+    height: 100%;
+    max-width: 1000px;
+    margin: 0;
+    padding: 0;
+}
+
+.search-results-page h2 {
+    color: #EEEEEE;
+    font-size: 4rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    text-align: center;
+    padding: 20px 0;
+    background-color: #222831;
+    z-index: 10;
+    margin: 0;
+}
+
+.search-results-page .result-container {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 20px 20px;
+    width: 100%;
+}
+
+.search-results-page .result-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.search-results-page .select-form {
+    margin: 0;
+    flex-basis: 0 0 auto;
+}
+
+.search-results-page .result-description, .search-results-page .result-brand {
+    display: block;
+    color: #EEEEEE;
+    font-size: 1.5em;
+    margin: 5px 0;
+}
+
+.search-results-page .result-list {
+    margin-right: 20px;
+}
+
+.search-results-page input[type="submit"], .search-results-page button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    background-color: #393E46;
+    color: #EEEEEE;
+}
+
+.search-results-page input[type="submit"]:hover {
+    background-color: #505C6B;
+    border-color: #baa1ba;
+}
+
+/* NUTRIENT */
+.content {
+    display: block;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.nutrient-list ul {
+    margin-left: auto; 
+    margin-right: auto;
+    padding: 0; 
+    font-size: 1.2em; 
+    width: auto; 
+    list-style-type: none; 
+    color: #EEEEEE; 
+    margin-left: 150px;
+}
+
+.nutrient-list {
+    display: block; 
+    flex-direction: column; 
+    align-items: center;
+    justify-content: center; 
+    width: 100%; 
+    height: 100%; 
+}
+
+.nutrient-list, .form-container {
+    flex: 1;  
+    margin: 10px; 
+}
+
+.nutrient-list li {
+    padding: 10px; 
+    border-bottom: 1px solid #393E46; 
+    width: 60%;
+    margin-left: 12.5%; 
+    box-sizing: border-box; 
+}
+
+/* FORM */
+.container {
+    display: flex;  
+    flex-direction: row; 
+    align-items: stretch; 
+    justify-content: space-between;
+    height: 100%; 
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%; 
+    max-width: 500px; 
+    margin: 20px auto;
+    margin-top: -20px; 
+    padding: 20px;  
+    box-sizing: border-box;  
+    font-size: 1.2em;
+}
+
+.container > .nutrient-list {
+    flex: 0 0 45%; 
+}
+
+.form-container label,
+.form-container input,
+.form-container button {
+    margin-top: 15px;  
+    margin-bottom: 15px; 
+
+}
+
+.form-container label {
+    color: #FFFFFF;  
+    text-align: left;  
+    display: block;  
+    width: 100%;  
+    margin-top: 30px; 
+    margin-bottom: 5px;  
+}
+
+.form-container input,
+.form-container button {
+    padding: 10px;          
+    border-radius: 5px;      
+    border: none;             
+    outline: none;            
+}
+
+.form-container input {
+    width: 70%;  
+    padding: 10px;  
+    margin-bottom: 30px;  
+    border: 1px solid #ccc;  
+    border-radius: 5px;  
+    outline: none;  
+    text-align: center;  
+    margin-top: 5px;
+}
+
+.form-container form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around; 
+    height: 100%; 
+}
+
+.form-container button {
+    padding: 10px 20px;  
+    background-color: #393E46; 
+    color: #EEEEEE;  
+    border-radius: 5px; 
+    cursor: pointer;
+    margin-top: 30px; 
+    width: 70%;
+    font-size: 1.2em;
+}
